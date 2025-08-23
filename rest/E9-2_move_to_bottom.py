@@ -9,6 +9,15 @@ def count_paths_formula(N: int) -> int:
     return math.comb(2*N-2, N-1)
 
 
+# m x n matrix
+# recursive (O(2^n)) 
+def count_paths(m, n):
+    if m == 0 and n == 0: # cell (0,0)
+        return 0
+    if m == 0 or n == 0: # first column/row
+        return 1
+    return count_paths(m-1, n) + count_paths(m, n-1)
+
 def count_paths_dp(N: int) -> int:
     dp = [[0] * N for _ in range(N)]  # First row and col = 1
 
@@ -24,6 +33,8 @@ def count_paths_dp(N: int) -> int:
     return dp[N - 1][N - 1]
 
 
+M = 4
 N = 4
 print("Paths (combinatorics):", count_paths_formula(N))
+print("Paths (recursive):", count_paths(M-1,N-1))
 print("Paths (DP):", count_paths_dp(N))
